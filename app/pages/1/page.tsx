@@ -1,17 +1,17 @@
-
 'use client';
 
 import { DollarSign, TrendingUp, Users, Globe, Smartphone } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { CustomPagination } from '@/components/ui/custom-pagination';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 const marketData = [
   { name: 'Digital Payments', value: 57.4, color: '#3182ce' },
   { name: 'Cash Payments', value: 42.6, color: '#ed8936' }
 ];
 
-export default function Slide1() {
+function Slide1Component() {
   const searchParams = useSearchParams();
   const total = Number(searchParams.get('total')) || 1;
   return (
@@ -105,5 +105,13 @@ export default function Slide1() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Slide1() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Slide1Component />
+    </Suspense>
   );
 }

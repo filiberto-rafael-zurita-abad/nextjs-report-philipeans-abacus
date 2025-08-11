@@ -1,9 +1,9 @@
-
 'use client';
 
 import { Wifi, MapPin, Building2, DollarSign, TrendingUp } from 'lucide-react';
 import { CustomPagination } from '@/components/ui/custom-pagination';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 const infrastructureData = {
   regions: [
@@ -23,7 +23,7 @@ const investmentMetrics = [
   { title: 'Cost Barrier', value: '11.3%', subtitle: 'of GNI per capita', icon: DollarSign }
 ];
 
-export default function Slide6() {
+function Slide6Component() {
   const searchParams = useSearchParams();
   const total = Number(searchParams.get('total')) || 1;
   return (
@@ -112,5 +112,13 @@ export default function Slide6() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Slide6() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Slide6Component />
+    </Suspense>
   );
 }

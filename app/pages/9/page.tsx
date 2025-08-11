@@ -3,6 +3,7 @@
 import { Shield, CheckCircle, Clock, Building, Globe } from 'lucide-react';
 import { CustomPagination } from '@/components/ui/custom-pagination';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 // Trimmed to 4 key milestones to reduce vertical space
 const milestones = [
@@ -22,7 +23,7 @@ const achievements = [
 // This section was removed to simplify the layout and fix overflow.
 // const regulatoryComponents = [ ... ];
 
-export default function Slide9() {
+function Slide9Component() {
   const searchParams = useSearchParams();
   const total = Number(searchParams.get('total')) || 1;
   return (
@@ -148,5 +149,13 @@ export default function Slide9() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Slide9() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Slide9Component />
+    </Suspense>
   );
 }

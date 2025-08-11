@@ -1,10 +1,10 @@
-
 'use client';
 
 import { useState } from 'react';
 import { ChevronDown, ChevronRight, Users, Target, Cog, Shield, CheckCircle, AlertTriangle } from 'lucide-react';
 import { CustomPagination } from '@/components/ui/custom-pagination';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 const strategicQuestions = [
   {
@@ -102,7 +102,7 @@ const actionItems = [
   { item: 'Develop compliance roadmap', completed: false }
 ];
 
-export default function Slide11() {
+function Slide11Component() {
   const [expandedQuestion, setExpandedQuestion] = useState<number | null>(1);
   const [checkedItems, setCheckedItems] = useState<number[]>([]);
   const searchParams = useSearchParams();
@@ -260,5 +260,13 @@ export default function Slide11() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Slide11() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Slide11Component />
+    </Suspense>
   );
 }

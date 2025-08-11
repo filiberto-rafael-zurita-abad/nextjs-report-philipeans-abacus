@@ -1,10 +1,10 @@
-
 'use client';
 
 import { TrendingUp, Target, Zap, Globe } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { CustomPagination } from '@/components/ui/custom-pagination';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 const growthData = [
   { year: '2018', total: 15.2, ecommerce: 2.1, realtime: 0.8 },
@@ -29,7 +29,7 @@ const drivers = [
   { title: 'Regulatory Support (BSP)', impact: 78, icon: TrendingUp }
 ];
 
-export default function Slide4() {
+function Slide4Component() {
   const searchParams = useSearchParams();
   const total = Number(searchParams.get('total')) || 1;
   return (
@@ -151,5 +151,13 @@ export default function Slide4() {
         */}
       </div>
     </div>
+  );
+}
+
+export default function Slide4() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Slide4Component />
+    </Suspense>
   );
 }

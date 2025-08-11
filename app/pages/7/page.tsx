@@ -1,10 +1,10 @@
-
 'use client';
 
 import { Send, Brain, TrendingUp, Users, AlertTriangle } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { CustomPagination } from '@/components/ui/custom-pagination';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 const remittanceData = [
   { year: '2018', total: 28.1, digital: 7.0 },
@@ -24,7 +24,7 @@ const brainDrainSectors = [
   { sector: 'Engineering', exodus: 67, impact: 'High' },
 ];
 
-export default function Slide7() {
+function Slide7Component() {
   const searchParams = useSearchParams();
   const total = Number(searchParams.get('total')) || 1;
   return (
@@ -212,5 +212,13 @@ export default function Slide7() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Slide7() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Slide7Component />
+    </Suspense>
   );
 }

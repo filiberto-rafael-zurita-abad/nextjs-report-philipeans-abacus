@@ -1,10 +1,10 @@
-
 'use client';
 
 import { Users, Building, Smartphone, Activity } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Cell } from 'recharts';
 import { CustomPagination } from '@/components/ui/custom-pagination';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 const ageData = [
   { age: '18-24', adoption: 68.2, color: '#3b82f6' },
@@ -20,7 +20,7 @@ const businessData = [
   { type: 'Sole Prop.', adoption: 43, employees: '1-49' }
 ];
 
-export default function Slide3() {
+function Slide3Component() {
   const searchParams = useSearchParams();
   const total = Number(searchParams.get('total')) || 1;
   return (
@@ -194,5 +194,13 @@ export default function Slide3() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Slide3() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Slide3Component />
+    </Suspense>
   );
 }

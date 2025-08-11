@@ -3,6 +3,7 @@
 import { TrendingUp, AlertTriangle, Shield, Wifi, Users, DollarSign } from 'lucide-react';
 import { CustomPagination } from '@/components/ui/custom-pagination';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 // Trimmed list to reduce vertical space
 const enablers = [
@@ -20,7 +21,7 @@ const barriers = [
   { factor: 'High Broadband Costs', impact: 'Medium', likelihood: 'Medium', severity: 55 },
 ];
 
-export default function Slide5() {
+function Slide5Component() {
   const searchParams = useSearchParams();
   const total = Number(searchParams.get('total')) || 1;
   return (
@@ -176,5 +177,13 @@ export default function Slide5() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Slide5() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Slide5Component />
+    </Suspense>
   );
 }

@@ -1,10 +1,10 @@
-
 'use client';
 
 import { BarChart3, PieChart, TrendingUp, Building2 } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer, PieChart as RechartsPieChart, Pie, Cell } from 'recharts';
 import { CustomPagination } from '@/components/ui/custom-pagination';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 const marketGrowthData = [
   { year: '2018', adoption: 10 },
@@ -20,7 +20,7 @@ const competitorData = [
   { name: 'Maya', value: 11, color: '#319795' }
 ];
 
-export default function Slide2() {
+function Slide2Component() {
   const searchParams = useSearchParams();
   const total = Number(searchParams.get('total')) || 1;
   return (
@@ -159,5 +159,13 @@ export default function Slide2() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Slide2() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Slide2Component />
+    </Suspense>
   );
 }

@@ -1,10 +1,10 @@
-
 'use client';
 
 import { Smartphone, Star, TrendingUp, Users, CreditCard } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Cell } from 'recharts';
 import { CustomPagination } from '@/components/ui/custom-pagination';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 const globalComparison = [
   { country: 'Philippines', usage: 91.3, color: '#10b981' },
@@ -26,7 +26,7 @@ const serviceTypes = [
   { service: 'Money Transfers', frequency: 80, satisfaction: 89 },
 ];
 
-export default function Slide8() {
+function Slide8Component() {
   const searchParams = useSearchParams();
   const total = Number(searchParams.get('total')) || 1;
   return (
@@ -163,5 +163,13 @@ export default function Slide8() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Slide8() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Slide8Component />
+    </Suspense>
   );
 }
