@@ -144,10 +144,11 @@ export default function Slide4() {
           </div>
         </div>
 
-        {/* Footer */}
+        {/* Footer 
         <div className="text-center text-gray-400 text-base flex-none -mt-2">
           Source: GlobalData & BSP Digital Payments Transformation Roadmap
         </div>
+        */}
       </div>
     </div>
   );
